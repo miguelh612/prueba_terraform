@@ -13,10 +13,10 @@ provider "aws" {
 
 # VPC
 resource "aws_vpc" "main_vpc" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+  cidr_block           = "10.0.0.0/16"
+  instance_tenancy     = "default"
   enable_dns_hostnames = true
-  enable_dns_support = true
+  enable_dns_support   = true
 
   tags = {
     Name = "Main VPC"
@@ -154,10 +154,10 @@ resource "aws_s3_bucket" "public_bucket" {
 resource "aws_s3_bucket_public_access_block" "image_storage" {
   bucket = aws_s3_bucket.public_bucket.bucket
 
-  block_public_acls       = true
-  block_public_policy     = true
-  ignore_public_acls      = true
-  restrict_public_buckets = true
+  block_public_acls       = false
+  block_public_policy     = false
+  ignore_public_acls      = false
+  restrict_public_buckets = false
 }
 
 # RDS
@@ -179,10 +179,10 @@ resource "aws_security_group" "bd_sg" {
   vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
-    description     = "Public Access"
-    from_port       = 0
-    to_port         = 0
-    protocol        = "-1"
+    description = "Public Access"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
